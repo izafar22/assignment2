@@ -1,21 +1,23 @@
 
 var calc=(function(){
+    
     var arr=[];
     var operand="";
+    
     return{
     add:function(){
         return arr[0]+arr[1];
     },
     mul:function(){
-        return n1*n2;
+        return arr[0]*arr[1];
     },
     div:function(){
-        return n1/n2;
+        return arr[0]/arr[1];
     },
     sub:function(){
-        if(n1>n2){
-        return n1-n2;}
-        return n2-n1;
+        if(arr[0]>arr[1]){
+        return arr[0]-arr[1];}
+        return arr[1]-arr[0];
     },
     setinputs:function(input){
         n1=0;
@@ -39,7 +41,8 @@ var calc=(function(){
 
 //DOM//
 document.getElementById("1").onclick=function(){
-    document.getElementById("input").value="1";
+    //console.log(document.getElementById("input").value);
+    document.getElementById("input").value+="1";
 };
 document.getElementById("2").onclick=function(){
     document.getElementById("input").value+="2";
@@ -72,6 +75,16 @@ document.getElementById("+").onclick=function(){
     calc.setOperand("+");
     console.log(calc.getOperand());
     var input=parseInt(document.getElementById("input").value);
+    document.getElementById("input").value=null;
+    console.log(input);
+    calc.pushComnpute(input);
+    console.log(calc.getarr());    
+};
+document.getElementById("-").onclick=function(){
+    calc.setOperand("-");
+    console.log(calc.getOperand());
+    var input=parseInt(document.getElementById("input").value);
+    document.getElementById("input").value=null;
     console.log(input);
     calc.pushComnpute(input);
     console.log(calc.getarr());    
@@ -82,5 +95,17 @@ document.getElementById("=").onclick=function(){
     if(calc.getOperand()=="+"){
         document.getElementById("input").value=calc.add();
     }
-    
+    else if(calc.getOperand()=="*"){
+        document.getElementById("input").value=calc.mul();
+    }
+    else if(calc.getOperand()=="/"){
+        document.getElementById("input").value=calc.div();
+    }
+    else if(calc.getOperand()=="-"){
+        document.getElementById("input").value=calc.sub();
+    }
+    else
+    {
+        console.log("invalid operand");
+    }
 }
